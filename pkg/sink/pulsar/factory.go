@@ -40,13 +40,13 @@ func NewCreatorFactory(config *Config, changefeedID model.ChangeFeedID) (pulsar.
 
 	co.Authentication, err = setupAuthentication(config)
 	if err != nil {
-		log.L().Error("setup pulsar authentication fail", zap.Error(err))
+		log.Error("setup pulsar authentication fail", zap.Error(err))
 		return nil, err
 	}
 
 	pulsarClient, err := pulsar.NewClient(co)
 	if err != nil {
-		log.L().Error("cannot connect to pulsar", zap.Error(err))
+		log.Error("cannot connect to pulsar", zap.Error(err))
 		return nil, err
 	}
 	return pulsarClient, nil
@@ -70,6 +70,6 @@ func setupAuthentication(config *Config) (pulsar.Authentication, error) {
 
 // NewMockCreatorFactory returns a factory implemented based on kafka-go
 func NewMockCreatorFactory(config *Config, changefeedID model.ChangeFeedID) (pulsar.Client, error) {
-	log.L().Info("mock pulsar client factory created", zap.Any("changfeedID", changefeedID))
+	log.Info("mock pulsar client factory created", zap.Any("changfeedID", changefeedID))
 	return nil, nil
 }
